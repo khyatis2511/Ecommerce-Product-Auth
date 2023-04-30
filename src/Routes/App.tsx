@@ -9,11 +9,12 @@ import {
 import { useDispatch } from 'react-redux';
 import Register from '../ViewController/Register';
 import Login from '../ViewController/Login';
-import AddProduct from '../ViewController/AddProduct';
 import { setUserData } from '../Redux/user/userSlice';
 import fetchData from '../utils/fetchData';
 import { LOGGED_IN_USER_DATA } from '../utils/apiEndPoint';
 import PrivateRoute from '../View/PrivateRoute';
+import Home from '../ViewController/Home/Home';
+import AddProduct from '../ViewController/AddProduct';
 
 const App : FC = () => {
   const [loading, setLoading] = useState(true);
@@ -51,10 +52,14 @@ const App : FC = () => {
         <Routes>
           <Route
             path="/"
-            element={<PrivateRoute component={AddProduct} />}
+            element={<PrivateRoute component={Home} />}
           />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
+          <Route
+            path="/product"
+            element={<PrivateRoute component={AddProduct} />}
+          />
         </Routes>
       </BrowserRouter>
     </div>

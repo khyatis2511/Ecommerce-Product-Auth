@@ -1,17 +1,20 @@
+/* eslint-disable react/jsx-props-no-spreading */
+/* eslint-disable react/require-default-props */
 import React, { ChangeEventHandler, FC } from 'react';
 
 interface InputTagProps {
   type: string,
-  onChange: ChangeEventHandler<HTMLInputElement>,
+  onChange?: ChangeEventHandler<HTMLInputElement>,
   placeholder: string,
   value: string,
   name: string,
   fieldName: string,
   fieldError: string,
+  disabled?: boolean
 }
 
 const InputTag : FC<InputTagProps> = ({
-  type, onChange, placeholder, value, name, fieldName, fieldError,
+  type, onChange, placeholder, value, name, fieldName, fieldError, disabled = false,
 }) => (
   <div className="form-group">
     { fieldName
@@ -24,6 +27,7 @@ const InputTag : FC<InputTagProps> = ({
       onChange={onChange}
       placeholder={placeholder}
       value={value}
+      disabled={disabled}
     />
     { fieldError
           && <span>{fieldError}</span>}
