@@ -10,9 +10,9 @@ const Home = () => {
         type="button"
         onClick={() => navigate('/product')}
       >
-        Product List
+        Add Product
       </button>
-      <p>Home page</p>
+      <p>Product List</p>
     </div>
   );
 };

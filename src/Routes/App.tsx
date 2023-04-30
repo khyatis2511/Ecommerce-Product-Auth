@@ -11,10 +11,10 @@ import Register from '../ViewController/Register';
 import Login from '../ViewController/Login';
 import { setUserData } from '../Redux/user/userSlice';
 import fetchData from '../utils/fetchData';
-import { LOGGED_IN_USER_DATA } from '../utils/apiEndPoint';
+import { USER } from '../utils/apiEndPoint';
 import PrivateRoute from '../View/PrivateRoute';
 import Home from '../ViewController/Home/Home';
-import AddProduct from '../ViewController/AddProduct';
+import Product from '../ViewController/Product';
 
 const App : FC = () => {
   const [loading, setLoading] = useState(true);
@@ -22,7 +22,7 @@ const App : FC = () => {
 
   useEffect(() => {
     const id = localStorage.getItem('loggedInUserId');
-    fetchData(LOGGED_IN_USER_DATA, 'POST', { id }).then((res) => {
+    fetchData(USER, 'POST', { id }).then((res) => {
       if (res && res.status === 200) {
         const { data } = res;
         dispatch(setUserData(data.id, data.name, data.email));
@@ -32,7 +32,7 @@ const App : FC = () => {
       }
     }).catch((error) => {
       if (error) {
-        // console.log('LOGGED_IN_USER_DATA api : ', error);
+        // console.log('USER : ', error);
         setLoading(false);
       }
     });
@@ -58,7 +58,7 @@ const App : FC = () => {
           <Route path="/login" element={<Login />} />
           <Route
             path="/product"
-            element={<PrivateRoute component={AddProduct} />}
+            element={<PrivateRoute component={Product} />}
           />
         </Routes>
       </BrowserRouter>

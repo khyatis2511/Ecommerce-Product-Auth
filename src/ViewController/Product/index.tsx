@@ -2,13 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import InputTag from '../../View/InputTag';
 import fetchData from '../../utils/fetchData';
-import { GET_CATEGORY, SAVE_PRODUCT } from '../../utils/apiEndPoint';
+import { CATEGORY, PRODUCT } from '../../utils/apiEndPoint';
 import { msgs } from '../../utils/messages';
 import SelectBox from '../../View/SelectBox';
 import { OptionObj } from '../../utils/types';
 import { user } from '../../Redux/user/userSlice';
 
-const AddProduct = () => {
+const Product = () => {
   const userData = useSelector(user);
 
   const [loading, setLoading] = useState(true);
@@ -36,7 +36,7 @@ const AddProduct = () => {
 
   useEffect(() => {
     setOwner(userData.name);
-    fetchData(GET_CATEGORY, 'GET').then((res) => {
+    fetchData(CATEGORY, 'GET').then((res) => {
       if (res && res.status === 200) {
         setCategories(res.data);
         setCategoriesError('');
@@ -89,7 +89,7 @@ const AddProduct = () => {
       owner: userData.id,
       status: 0,
     };
-    fetchData(SAVE_PRODUCT, 'POST', data).then((res) => {
+    fetchData(PRODUCT, 'POST', data).then((res) => {
       if (res && res.status === 200) {
         setSaveProductMsg(res.message);
       } else {
@@ -192,4 +192,4 @@ const AddProduct = () => {
   );
 };
 
-export default AddProduct;
+export default Product;
